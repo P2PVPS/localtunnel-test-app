@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/P2PVPS/localtunnel-test-app/issues"
   },
-  "homepage": "https://github.com/P2PVPS/localtunnel-test-app#readme"
+  "homepage": "https://github.com/P2PVPS/localtunnel-test-app#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "express3-handlebars": "^0.5.2"
+  }
 }
