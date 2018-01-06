@@ -4,7 +4,8 @@
   "description": "LocalTunnel test application",
   "main": "index.js",
   "scripts": {
-    "test": "echo no tests"
+    "test": "echo no tests",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
