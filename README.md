@@ -18,7 +18,7 @@ https://github.com/localtunnel/localtunnel
 
 * Run LocalTunnel and instruct it to forward port 3000:
 
-`lt --port 3000`
+`lt --port 3500`
 
 * Install the dependencies for your new web application:
 
