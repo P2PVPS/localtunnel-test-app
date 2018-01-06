@@ -1,0 +1,19 @@
+{
+  "name": "localtunnel-test-app",
+  "version": "1.0.0",
+  "description": "LocalTunnel test application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo no tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/P2PVPS/localtunnel-test-app.git"
+  },
+  "author": "chris.troutner@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/P2PVPS/localtunnel-test-app/issues"
+  },
+  "homepage": "https://github.com/P2PVPS/localtunnel-test-app#readme"
+}
