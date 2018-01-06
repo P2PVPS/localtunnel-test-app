@@ -1,0 +1,205 @@
+<section>
+  <div class='container well well-lg'>
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Select Log Level
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><a href="#/" onclick="changeLogs(0)">info</a></li>
+            <li><a href="#/" onclick="changeLogs(1)">debug</a></li>
+            <li><a href="#/" onclick="changeLogs(2)">silly</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-sm-3">
+        <button class="btn btn-default" onclick="refreshLogs()">Refresh Logs</button>
+      </div>
+
+      <div class="col-sm-3">
+        <button class="btn btn-default" onclick="clearLogs()">Clear Logs</button>
+      </div>
+
+    </div>
+
+    <br>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div style="max-height: 500px; overflow-y: scroll;">
+          <table id="log-table" class="table table-condensed table-hover table-bordered table-striped">
+            <tr class="header">
+              <th>Log</th>
+              <th>Date</th>
+              <th>JSON</th>
+            </tr>
+            <tr class="scaffold" hidden>
+              <td class="log-val"></td>
+              <td class="log-date"></td>
+              <td class="json-link"><a href="#/">View JSON</a></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div id="json-view" style="max-height: 500px; overflow-y: scroll;">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script type="text/javascript">
+  // Global variables
+  var logData; // Holds all log data retrieved from the server.
+  var logLevel = 0;
+
+  function refreshLogs() {
+    clearTable();
+
+    $.get('http://localhost:5555/logs100', '', function(data) {
+      //debugger;
+
+      logData = data;
+
+      var scaffold = $('.scaffold');
+
+      for(var i = 0; i < data.length; i++) {
+        var thisRow = scaffold.clone();
+        var thisLog = data[i];
+
+        // Prep the row
+        thisRow.removeClass('scaffold');
+        thisRow.attr('id', thisLog.id);
+
+        // Display all logs.
+        if(logLevel == 2) {
+          thisRow.find('.log-val').text(`${thisLog.level}: ${thisLog.message}`);
+
+          // Insert the date
+          var logDate = new Date(thisLog.createdAt);
+          thisRow.find('.log-date').text(logDate.toLocaleString());
+
+          // Remove the 'View JSON' link if no JSON exists.
+          if(thisLog.jsonBody == null) {
+            thisRow.find('.json-link').find('a').remove();
+          } else {
+            thisRow.find('.json-link').find('a').click(viewJSON);
+          }
+
+          // Append the new row to the table.
+          $('#log-table').append(thisRow);
+          thisRow.show();
+
+        // Display debug or higher priority logs.
+        } else if(logLevel == 1) {
+          if(thisLog.level != 'silly') {
+            thisRow.find('.log-val').text(`${thisLog.level}: ${thisLog.message}`);
+
+            // Insert the date
+            var logDate = new Date(thisLog.createdAt);
+            thisRow.find('.log-date').text(logDate.toLocaleString());
+
+            // Remove the 'View JSON' link if no JSON exists.
+            if(thisLog.jsonBody == null) {
+              thisRow.find('.json-link').find('a').remove();
+            } else {
+              thisRow.find('.json-link').find('a').click(viewJSON);
+            }
+
+            // Append the new row to the table.
+            $('#log-table').append(thisRow);
+            thisRow.show();
+          }
+
+        // Display only info level logs.
+        } else if(logLevel == 0) {
+          if((thisLog.level != 'silly') && (thisLog.level != 'debug')) {
+            thisRow.find('.log-val').text(`${thisLog.level}: ${thisLog.message}`);
+
+            // Insert the date
+            var logDate = new Date(thisLog.createdAt);
+            thisRow.find('.log-date').text(logDate.toLocaleString());
+
+            // Remove the 'View JSON' link if no JSON exists.
+            if(thisLog.jsonBody == null) {
+              thisRow.find('.json-link').find('a').remove();
+            } else {
+              thisRow.find('.json-link').find('a').click(viewJSON);
+            }
+
+            // Append the new row to the table.
+            $('#log-table').append(thisRow);
+            thisRow.show();
+          }
+        }
+
+
+      }
+    });
+  }
+
+  // Clear the table of all previous entries.
+  function clearTable() {
+    //debugger;
+
+    var allRows = $('tr');
+
+    for(var i=0; i < allRows.length; i++) {
+      var thisRow = $(allRows[i]);
+
+      if(thisRow.hasClass('scaffold')) continue;
+      if(thisRow.hasClass('header')) continue;
+
+      thisRow.remove();
+    }
+  }
+
+  function viewJSON(event) {
+    //debugger;
+
+    var target = $(event.target);
+    var thisRow = target.parent().parent();
+    var GUID = Number(thisRow.attr('id'));
+
+    var dataEntry = logData.find(function(element) {
+      return element.id === GUID;
+    });
+
+
+    var jsonDiv = $('#json-view');
+    jsonDiv.empty();
+
+    jsonDiv.append('<code class="jsonOutput" style="white-space: pre;"></code>');
+    jsonDiv.find('.jsonOutput').text(JSON.stringify(dataEntry.jsonBody,null,2));
+  }
+
+  // Change the log level of logs displayed on the page.
+  function changeLogs(val) {
+    //debugger;
+
+    logLevel = val;
+    refreshLogs();
+  }
+
+  // Clear the logs table.
+  function clearLogs() {
+    clearTable();
+
+    $.get('http://localhost:5555/wipeLogs', '', function(data) {
+      //debugger;
+      if(!data)
+        console.error('Something went wrong with /wipeLogs.');
+    });
+  }
+</script>
