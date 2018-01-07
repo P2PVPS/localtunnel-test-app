@@ -16,13 +16,14 @@ https://github.com/localtunnel/localtunnel
 
 `sudo npm install -g localtunnel`
 
-* Run LocalTunnel and instruct it to forward port 3000:
-
-`lt --port 3500`
-
 * Install the dependencies for your new web application:
 
 `npm install`
+
+* Run LocalTunnel and instruct it to forward port 3500. Not the URL it gives you.
+This is the URL where you can access the website your device is serving.
+
+`lt --port 3500 &`
 
 * Run your web app:
 
