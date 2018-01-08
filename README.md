@@ -8,23 +8,31 @@ https://github.com/localtunnel/localtunnel
 
 ## Installation
 
-* After logging into your VM. Download this repository:
-
-`git clone https://github.com/P2PVPS/localtunnel-test-app`
-
-* Install LocalTunnel in your VPS with the following command:
+1. Install LocalTunnel in your VPS with the following command:
 
 `sudo npm install -g localtunnel`
 
-* Install the dependencies for your new web application:
+2. After logging into your VM. Download this repository:
+
+`git clone https://github.com/P2PVPS/localtunnel-test-app`
+
+Occasionally, you'll get the following error:
+
+`fatal: could not create work tree dir 'localtunnel-test-app': Permission denied`
+
+You can fix this by giving yourself permission with this command:
+
+`sudo chown -R $USER /media/storage/`
+
+3. Install the dependencies for your new web application:
 
 `npm install`
 
-* Run LocalTunnel and instruct it to forward port 3500. Not the URL it gives you.
+4. Run LocalTunnel and instruct it to forward port 3500. Not the URL it gives you.
 This is the URL where you can access the website your device is serving.
 
 `lt --port 3500 &`
 
-* Run your web app:
+5. Run your web app:
 
 `npm start`
