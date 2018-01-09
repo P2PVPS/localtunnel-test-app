@@ -7,6 +7,7 @@ https://github.com/localtunnel/localtunnel
 
 
 ## Installation
+**You can [watch a video](http://p2pvps.org/serving-an-express-js-web-app-with-a-p2p-vps-rental/) on how to run this example program on a P2P VPS rented server**
 
 1. Install LocalTunnel in your VPS with the following command:
 
