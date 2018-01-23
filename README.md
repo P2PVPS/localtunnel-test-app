@@ -29,7 +29,7 @@ You can fix this by giving yourself permission with this command:
 
 `npm install`
 
-4. Run LocalTunnel and instruct it to forward port 3500. Not the URL it gives you.
+4. Run LocalTunnel and instruct it to forward port 3500. Note the URL it gives you.
 This is the URL where you can access the website your device is serving.
 
 `lt --host http://peerlink.fun --port 3500 &`
