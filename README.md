@@ -32,8 +32,14 @@ You can fix this by giving yourself permission with this command:
 4. Run LocalTunnel and instruct it to forward port 3500. Not the URL it gives you.
 This is the URL where you can access the website your device is serving.
 
-`lt --port 3500 &`
+`lt --host http://peerlink.fun --port 3500 &`
 
 5. Run your web app:
 
 `npm start`
+
+## HTTPS
+A note on HTTPS and SSL encryption:
+[Let's Encrypt will issue wildcard certs](https://letsencrypt.org/2017/07/06/wildcard-certificates-coming-jan-2018.html)
+at the end of February 2018. At that point, the peerlink.fun server will be updated
+to allow HTTPS encryption from your rented device.
