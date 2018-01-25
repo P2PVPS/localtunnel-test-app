@@ -29,10 +29,10 @@ mdoc.run({
     //indexContent will take precedence over `indexContentPath`
     indexContent : '<h1>Example Document</h1><p>This example document shows how to easily disseminate information.</p>',
 
-    mapOutName : function(outputName) {
+    //mapOutName : function(outputName) {
         //change file output name
-        return outputName.replace('.html', '_doc.html');
-    },
+    //    return outputName.replace('.html', '_doc.html');
+    //},
 
     mapTocName : function(fileName, tocObject){
         //change the name displayed on the sidebar and on the index TOC
