@@ -9,11 +9,15 @@ https://github.com/localtunnel/localtunnel
 ## Installation
 **You can [watch a video](http://p2pvps.org/serving-an-express-js-web-app-with-a-p2p-vps-rental/) on how to run this example program on a P2P VPS rented server**
 
-1. Install LocalTunnel in your VPS with the following command:
+1. After logging in, navigate to the storage directory:
+
+`cd /media/storage`
+
+2. Install LocalTunnel in your VPS with the following command:
 
 `sudo npm install -g localtunnel`
 
-2. After logging into your VM. Download this repository:
+3. After logging into your VM. Download this repository:
 
 `git clone https://github.com/P2PVPS/localtunnel-test-app`
 
@@ -25,16 +29,16 @@ You can fix this by giving yourself permission with this command:
 
 `sudo chown -R $USER /media/storage/`
 
-3. Install the dependencies for your new web application:
+4. Install the dependencies for your new web application:
 
 `npm install`
 
-4. Run LocalTunnel and instruct it to forward port 3500. Note the URL it gives you.
+5. Run LocalTunnel and instruct it to forward port 3500. Note the URL it gives you.
 This is the URL where you can access the website your device is serving.
 
 `lt --host http://peerlink.fun --port 3500 &`
 
-5. Run your web app:
+6. Run your web app:
 
 `npm start`
 
